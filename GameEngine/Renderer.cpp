@@ -1,6 +1,7 @@
 #include "Renderer.h"
 
-void Renderer::draw(Context& context, sf::RenderWindow& window) {
+void Renderer::draw_game(Context& context, sf::RenderWindow& window) {
+	window.clear(sf::Color::Black);
 	auto objects = context.get_object_snapshots();
 	for (auto obj : objects) {
 		if (obj._type == ObjectType::Player) {
@@ -13,11 +14,18 @@ void Renderer::draw(Context& context, sf::RenderWindow& window) {
 			sprite.setTexture(texture);
 			sprite.setPosition(obj._coord.x, obj._coord.y);
 
-			window.clear(sf::Color::Black);
 		
 			window.draw(sprite);
-			window.display();
 		}
 		
 	}
+	window.display();
 };
+
+void Renderer::draw_game_pause(sf::RenderWindow& window) {
+	window.clear(sf::Color::Black);
+	sf::Text text;
+	text.setString("Game is paused");
+	window.draw(text);
+	window.display();
+}

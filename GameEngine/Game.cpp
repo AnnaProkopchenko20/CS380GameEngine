@@ -2,14 +2,13 @@
 
 
 void Game::create_window() {
-    window.create(sf::VideoMode(1300, 1300), "basic game window", sf::Style::Close);
-    window.setFramerateLimit(60);
+    window.create(sf::VideoMode(GameSettings::screen_width_px, GameSettings::screen_height_px), GameSettings::window_name, GameSettings::window_style);
+    window.setFramerateLimit(GameSettings::framerate_limit);
 }
 
 void Game::start() {
 
     sf::Clock clock;
-    int top_limit_of_elapsed = 20;
 
     while (window.isOpen())
     {
@@ -27,7 +26,6 @@ void Game::start() {
         if (window.hasFocus()) {
             context.update(get_keyboard_inputs());
             context.update(std::min(elapsed.asMilliseconds(),top_limit_of_elapsed));
-
             game_logic.update(context);
             renderer.draw(context, window);
         }
@@ -36,16 +34,11 @@ void Game::start() {
 
 };
 
-std::map<sf::Keyboard::Key, Command> sfml_keys_to_local_program_commands = {
-	{sf::Keyboard::Left, Command::LEFT},
-	{sf::Keyboard::Right, Command::RIGHT},
-	{sf::Keyboard::Up, Command::UP},
-	{sf::Keyboard::Down, Command::DOWN}
-};
+
 std::vector<Command> Game::get_keyboard_inputs() {
 
     std::vector<Command> pressed_keys = std::vector<Command>();
-    for (auto kvp : sfml_keys_to_local_program_commands) {
+    for (auto kvp : GameSettings::sfml_keys_to_local_program_commands) {
         if (sf::Keyboard::isKeyPressed(kvp.first)) {
             pressed_keys.push_back(kvp.second);
         }
