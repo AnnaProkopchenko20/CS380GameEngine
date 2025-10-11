@@ -22,7 +22,6 @@ Player::~Player() {};
 
 ObjectSnapshot Player::get_object_snapshot() {
 	auto snapshot = engine.get_engine_snapshot();
-
 	return ObjectSnapshot(snapshot.second, ObjectType::Player, id, snapshot.first);
 }
 

@@ -139,9 +139,8 @@
   <ItemGroup>
     <ClCompile Include="Context.cpp" />
     <ClCompile Include="Game.cpp" />
-    <ClCompile Include="GameEngine.cpp" />
+    <ClCompile Include="GameLogic.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Object.cpp" />
     <ClCompile Include="ObjectSnapshot.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Renderer.cpp" />
@@ -150,12 +149,14 @@
   <ItemGroup>
     <ClInclude Include="Context.h" />
     <ClInclude Include="Game.h" />
-    <ClInclude Include="GameEngine.h" />
+    <ClInclude Include="GameLogic.h" />
+    <ClInclude Include="GameSettings.h" />
     <ClInclude Include="Object.h" />
     <ClInclude Include="ObjectSnapshot.h" />
     <ClInclude Include="ObjectType.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Renderer.h" />
+    <ClInclude Include="RendererSettings.h" />
     <ClInclude Include="SetSpeedEngine.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

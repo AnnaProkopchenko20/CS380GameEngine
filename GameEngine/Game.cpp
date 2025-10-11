@@ -10,6 +10,8 @@ void Game::start() {
 
     sf::Clock clock;
 
+    bool is_game_paused = false;
+
     while (window.isOpen())
     {
         
@@ -21,15 +23,41 @@ void Game::start() {
             if (event.type == sf::Event::Closed) {
                 window.close();
             }
+            if (event.type == sf::Event::KeyPressed) {
+                if (event.key.code == sf::Keyboard::Space) {
+                    is_game_paused = !is_game_paused;
+                }
+            }
         }
 
-        if (window.hasFocus()) {
-            context.update(get_keyboard_inputs());
-            context.update(std::min(elapsed.asMilliseconds(),top_limit_of_elapsed));
-            game_logic.update(context);
-            renderer.draw(context, window);
+        if (!window.hasFocus()) {
+            continue;
         }
-      
+
+
+        if (is_game_paused) {
+            try{
+                renderer.draw_pause(window);
+            }
+            catch (std::runtime_error) {
+                printf("issue with renderer dependencies");
+                exit(0);
+            }
+            
+        }
+        else {
+            context.update(get_keyboard_inputs());
+            context.update(std::min(elapsed.asMilliseconds(), GameSettings::top_limit_of_elapsed_time_in_miliseconds));
+            game_logic->update(context);
+            try {
+                renderer.draw_game(context, window);
+            }
+            catch (std::runtime_error) {
+                printf("issue with renderer dependencies");
+                exit(0);
+            }
+            
+        }
     }
 
 };
@@ -49,8 +77,10 @@ std::vector<Command> Game::get_keyboard_inputs() {
 Game::Game() {
     create_window();
     context = Context();
-    game_logic = GameEngine();
+    game_logic = new GameLogic();
     renderer = Renderer();
 }
 
-Game::~Game(){};
+Game::~Game(){
+    delete game_logic;
+};

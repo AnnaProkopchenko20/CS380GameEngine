@@ -22,7 +22,7 @@ public:
 	void update(std::vector<ObjectSnapshot> object_snapshots);
 	std::vector<ObjectSnapshot> get_object_snapshots();
 private:
-	int _frame_delta_in_miliseconds;
+	int _frame_delta_in_miliseconds{};
 	std::vector<Command> _commands;
 	std::vector<ObjectSnapshot> _object_snapshots;
 };

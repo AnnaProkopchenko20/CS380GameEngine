@@ -1,7 +1,7 @@
-#include "GameEngine.h"
+#include "GameLogic.h"
 #include "ObjectSnapshot.h"
 
-void GameEngine::update(Context& context) {
+void GameLogic::update(Context& context) {
 
 	player->update_delta(context.get_frame_delta());
 
@@ -28,9 +28,11 @@ void GameEngine::update(Context& context) {
 	context.update(snapshots);
 };
 
-GameEngine::GameEngine() {
+GameLogic::GameLogic() {
 	float playerspeed = 0.5;
 	int id = 1;
 	player = new Player(playerspeed, id);
 };
-GameEngine::~GameEngine() {};
+GameLogic::~GameLogic() {
+	delete player;
+};

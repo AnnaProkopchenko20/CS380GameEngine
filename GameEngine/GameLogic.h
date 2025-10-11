@@ -5,13 +5,13 @@
 #include "Context.h"
 #include "Player.h"
 
-class GameEngine {
+class GameLogic {
 private:
 
     Player* player;
 public:
     void update(Context& context);
-    GameEngine();
-    ~GameEngine();
+    GameLogic();
+    ~GameLogic();
 };
 

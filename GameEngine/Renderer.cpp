@@ -1,14 +1,14 @@
 #include "Renderer.h"
 
 void Renderer::draw_game(Context& context, sf::RenderWindow& window) {
-	window.clear(sf::Color::Black);
+	window.clear(sf::Color::Green);
 	auto objects = context.get_object_snapshots();
 	for (auto obj : objects) {
 		if (obj._type == ObjectType::Player) {
 			sf::Texture texture;
 			if (!texture.loadFromFile("shaun.png"))
 			{
-				// error
+				throw std::runtime_error("cant open player picture");
 			}
 			sf::Sprite sprite;
 			sprite.setTexture(texture);
@@ -22,10 +22,20 @@ void Renderer::draw_game(Context& context, sf::RenderWindow& window) {
 	window.display();
 };
 
-void Renderer::draw_game_pause(sf::RenderWindow& window) {
+void Renderer::draw_pause(sf::RenderWindow& window) {
 	window.clear(sf::Color::Black);
 	sf::Text text;
-	text.setString("Game is paused");
+	sf::Font font;
+	if (!font.loadFromFile(RendererSettings::pause_font_path))
+	{
+		throw std::runtime_error("cant open font");
+	}
+	text.setFont(font);
+
+	text.setCharacterSize(RendererSettings::pause_font_size);
+
+	text.setFillColor(RendererSettings::pause_colour);
+	text.setString(RendererSettings::pause_message);
 	window.draw(text);
 	window.display();
 }

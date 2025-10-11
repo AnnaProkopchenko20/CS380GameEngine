@@ -10,7 +10,7 @@ namespace GameSettings
 	const std::string window_name = "Basic game window";
 	const auto window_style = sf::Style::Close;
 	const int framerate_limit = 60;
-
+	const int top_limit_of_elapsed_time_in_miliseconds = 20;
 
 	const std::map<sf::Keyboard::Key, Command> sfml_keys_to_local_program_commands = {
 	{sf::Keyboard::Left, Command::LEFT},
