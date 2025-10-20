@@ -1,6 +1,5 @@
 #include "Game.h"
 
-
 void Game::create_window() {
     window.create(sf::VideoMode(GameSettings::screen_width_px, GameSettings::screen_height_px), GameSettings::window_name, GameSettings::window_style);
     window.setFramerateLimit(GameSettings::framerate_limit);
@@ -9,8 +8,11 @@ void Game::create_window() {
 void Game::start() {
 
     sf::Clock clock;
-
-    bool is_game_paused = false;
+     
+    bool is_focused = true;
+    bool is_paused_by_user = false;
+    bool is_pause_held = false;
+    is_key_pressed[sf::Keyboard::Space] = false;
 
     while (window.isOpen())
     {
@@ -20,20 +22,37 @@ void Game::start() {
         sf::Event event;
         while (window.pollEvent(event))
         { 
-            if (event.type == sf::Event::Closed) {
+            switch (event.type) {
+            case sf::Event::Closed:
                 window.close();
+                break;
+            case sf::Event::KeyPressed:
+                is_key_pressed[event.key.code] = true;
+                break;
+            case sf::Event::KeyReleased:
+                is_key_pressed[event.key.code] = false;
+                break;
+            case sf::Event::LostFocus:
+                reset_keyboard_inputs();
+                is_focused = false;
+                break;
+            case sf::Event::GainedFocus:
+                is_focused = true;
+                set_listened_keyboard_inputs();               
             }
-            if (event.type == sf::Event::KeyPressed) {
-                if (event.key.code == sf::Keyboard::Space) {
-                    is_game_paused = !is_game_paused;
-                }
-            }
+            
         }
 
-        if (!window.hasFocus()) {
-            continue;
+        if (!is_pause_held && is_key_pressed[sf::Keyboard::Space]) {
+            is_pause_held = true;
+            is_paused_by_user = !is_paused_by_user;
         }
 
+        if (!is_key_pressed[sf::Keyboard::Space]) {
+            is_pause_held = false;
+        }
+
+        bool is_game_paused = is_paused_by_user || !is_focused;
 
         if (is_game_paused) {
             try{
@@ -46,7 +65,7 @@ void Game::start() {
             
         }
         else {
-            context.update(get_keyboard_inputs());
+            context.update(get_command_inputs());
             context.update(std::min(elapsed.asMilliseconds(), GameSettings::top_limit_of_elapsed_time_in_miliseconds));
             game_logic->update(context);
             try {
@@ -62,12 +81,40 @@ void Game::start() {
 
 };
 
+// feedback
+// more refrences less copying
+// use events keypresed rather then  always reading
 
-std::vector<Command> Game::get_keyboard_inputs() {
+
+// create hashmap with sprites
+//enums are not ideal because require recompilation but hashmaps are better
+//object contains photo hash
+
+// factory that randomly assigns the sprite
+// SETFactory
+// assign the sprite at object creation
+
+//  different object snapshots for different purposes like renderer with sprites and object colision
+
+void Game::set_listened_keyboard_inputs() {
+    for (auto kvp : GameSettings::sfml_keys_to_local_program_commands) {
+        if (sf::Keyboard::isKeyPressed(kvp.first)) {
+            is_key_pressed[kvp.first] = true;
+        }
+    }
+}
+
+void Game::reset_keyboard_inputs() {
+    for (auto& kvp : is_key_pressed) {
+        is_key_pressed[kvp.first] = false;
+    }
+}
+
+std::vector<Command> Game::get_command_inputs() {
 
     std::vector<Command> pressed_keys = std::vector<Command>();
     for (auto kvp : GameSettings::sfml_keys_to_local_program_commands) {
-        if (sf::Keyboard::isKeyPressed(kvp.first)) {
+        if (is_key_pressed[kvp.first]) {
             pressed_keys.push_back(kvp.second);
         }
     }

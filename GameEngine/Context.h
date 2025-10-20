@@ -16,7 +16,7 @@ enum class Command {
 class Context{
 public:
 	void update(std::vector<Command> commands);
-	std::vector<Command> get_commands();
+	std::vector<Command>& get_commands();
 	int get_frame_delta();
 	void update(int frame_delta_in_miliseconds);
 	void update(std::vector<ObjectSnapshot> object_snapshots);

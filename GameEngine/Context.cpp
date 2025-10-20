@@ -8,8 +8,8 @@ void Context::update(std::vector<ObjectSnapshot> object_snapshots) {
 	_object_snapshots = object_snapshots;
 }
 
-std::vector<Command> Context::get_commands() {
-	return std::vector<Command>(_commands);
+std::vector<Command>& Context::get_commands() {
+	return _commands;
 };
 
 int Context::get_frame_delta() {

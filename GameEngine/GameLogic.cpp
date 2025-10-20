@@ -23,7 +23,7 @@ void GameLogic::update(Context& context) {
 		}
 		
 	}
-	std::vector<ObjectSnapshot> snapshots = std::vector<ObjectSnapshot>();
+	std::vector<ObjectSnapshot> snapshots;
 	snapshots.push_back(player->get_object_snapshot());
 	context.update(snapshots);
 };
