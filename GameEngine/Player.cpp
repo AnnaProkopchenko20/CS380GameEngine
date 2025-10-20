@@ -20,9 +20,9 @@ Player::Player(float speed, int id) : engine(speed, default_rotation, default_co
 };
 Player::~Player() {};
 
-ObjectSnapshot Player::get_object_snapshot() {
+RenderSnapshot Player::get_object_snapshot() {
 	auto snapshot = engine.get_engine_snapshot();
-	return ObjectSnapshot(snapshot.second, ObjectType::Player, id, snapshot.first);
+	return RenderSnapshot(snapshot.second, snapshot.first, "shaun.png");
 }
 
 void Player::update_delta(int delta_time_in_miliseconds) {

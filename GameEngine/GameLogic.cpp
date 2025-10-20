@@ -1,5 +1,4 @@
 #include "GameLogic.h"
-#include "ObjectSnapshot.h"
 
 void GameLogic::update(Context& context) {
 
@@ -23,7 +22,7 @@ void GameLogic::update(Context& context) {
 		}
 		
 	}
-	std::vector<ObjectSnapshot> snapshots;
+	std::vector<RenderSnapshot> snapshots;
 	snapshots.push_back(player->get_object_snapshot());
 	context.update(snapshots);
 };

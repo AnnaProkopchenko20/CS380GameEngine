@@ -4,7 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/Window.hpp>
 #include <vec2.hpp> 
-#include "ObjectSnapshot.h"
+#include "RenderSnapshot.h"
 
 enum class Command {
 	LEFT,
@@ -19,12 +19,12 @@ public:
 	std::vector<Command>& get_commands();
 	int get_frame_delta();
 	void update(int frame_delta_in_miliseconds);
-	void update(std::vector<ObjectSnapshot> object_snapshots);
-	std::vector<ObjectSnapshot> get_object_snapshots();
+	void update(std::vector<RenderSnapshot> object_snapshots);
+	std::vector<RenderSnapshot> get_object_snapshots();
 private:
 	int _frame_delta_in_miliseconds{};
 	std::vector<Command> _commands;
-	std::vector<ObjectSnapshot> _object_snapshots;
+	std::vector<RenderSnapshot> _object_snapshots;
 };
 
 

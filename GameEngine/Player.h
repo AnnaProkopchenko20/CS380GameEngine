@@ -26,7 +26,7 @@ public:
     void move_right();
     Player(float speed, int id);
     ~Player();
-    ObjectSnapshot get_object_snapshot();
+    RenderSnapshot get_object_snapshot();
 
     Player& operator=(const Player& other) {
         engine = other.engine;

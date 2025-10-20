@@ -85,11 +85,6 @@ void Game::start() {
 // more refrences less copying
 // use events keypresed rather then  always reading
 
-
-// create hashmap with sprites
-//enums are not ideal because require recompilation but hashmaps are better
-//object contains photo hash
-
 // factory that randomly assigns the sprite
 // SETFactory
 // assign the sprite at object creation

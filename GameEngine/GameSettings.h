@@ -1,6 +1,7 @@
 #pragma once
 
 #include <string>
+#include <unordered_map>
 
 namespace GameSettings
 {
@@ -18,6 +19,5 @@ namespace GameSettings
 	{sf::Keyboard::Up, Command::UP},
 	{sf::Keyboard::Down, Command::DOWN}
 	};
-
 };
 

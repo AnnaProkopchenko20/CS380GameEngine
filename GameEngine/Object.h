@@ -1,9 +1,9 @@
 #pragma once
-#include "ObjectSnapshot.h"
+#include "RenderSnapshot.h"
 
 class Object {
 public:
-    virtual ObjectSnapshot get_object_snapshot()=0;
+    virtual RenderSnapshot get_object_snapshot()=0;
 };
 
 
