@@ -12,12 +12,32 @@ void Renderer::draw_game(Context& context, sf::RenderWindow& window) {
 			{
 				throw std::runtime_error("cant open player picture");
 			}
-
+			
 			textures[obj._picture_name] = texture;
 		}
 		sf::Sprite sprite;
 		sprite.setTexture(*textures[obj._picture_name]);
 		sprite.setPosition(obj._coord.x, obj._coord.y);
+
+		if (context.get_render_mode()) {
+
+			if (obj._base_shape == "circle") {
+				float size = sprite.getLocalBounds().width / 2.f;
+				sf::CircleShape shape(size);
+				shape.setFillColor(sf::Color::Blue);
+				shape.setPosition(obj._coord.x, obj._coord.y);
+				window.draw(shape);
+			}
+			else if (obj._base_shape == "rectangle") {
+				float x = sprite.getLocalBounds().width / 2.f;
+				float y = sprite.getLocalBounds().height / 2.f;
+
+				sf::RectangleShape shape(sf::Vector2<float>(x, y));
+				shape.setFillColor(sf::Color::Blue);
+				shape.setPosition(obj._coord.x + x / 2, obj._coord.y + y / 2);
+				window.draw(shape);
+			}
+		}
 		window.draw(sprite);
 		
 	}

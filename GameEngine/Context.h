@@ -21,10 +21,13 @@ public:
 	void update(int frame_delta_in_miliseconds);
 	void update(std::vector<RenderSnapshot> object_snapshots);
 	std::vector<RenderSnapshot> get_object_snapshots();
+	void flip_renderer_mode();
+	bool get_render_mode();
 private:
 	int _frame_delta_in_miliseconds{};
 	std::vector<Command> _commands;
 	std::vector<RenderSnapshot> _object_snapshots;
+	bool renderer_bounding_boxes=false;
 };
 
 

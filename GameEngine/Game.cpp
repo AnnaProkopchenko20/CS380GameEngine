@@ -14,6 +14,9 @@ void Game::start() {
     bool is_pause_held = false;
     is_key_pressed[sf::Keyboard::Space] = false;
 
+    bool is_mode_flipped_held = true;
+    sf::Keyboard::Key flip_mode_key = sf::Keyboard::F;
+
     while (window.isOpen())
     {
         
@@ -52,6 +55,15 @@ void Game::start() {
             is_pause_held = false;
         }
 
+        if (!is_mode_flipped_held && is_key_pressed[flip_mode_key]) {
+            is_mode_flipped_held = true;
+            context.flip_renderer_mode();
+        }
+
+        if (!is_key_pressed[flip_mode_key]) {
+            is_mode_flipped_held = false;
+        }
+
         bool is_game_paused = is_paused_by_user || !is_focused;
 
         if (is_game_paused) {
@@ -83,7 +95,6 @@ void Game::start() {
 
 // feedback
 // more refrences less copying
-// use events keypresed rather then  always reading
 
 // factory that randomly assigns the sprite
 // SETFactory

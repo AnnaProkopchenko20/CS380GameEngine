@@ -22,7 +22,7 @@ Player::~Player() {};
 
 RenderSnapshot Player::get_object_snapshot() {
 	auto snapshot = engine.get_engine_snapshot();
-	return RenderSnapshot(snapshot.second, snapshot.first, "shaun.png");
+	return RenderSnapshot(snapshot.second, snapshot.first, "shaun.png","rectangle");
 }
 
 void Player::update_delta(int delta_time_in_miliseconds) {
