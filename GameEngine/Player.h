@@ -2,6 +2,7 @@
 
 #include "Object.h"
 #include "SetSpeedEngine.h"
+#include <vec2.hpp> 
 
 class Player : public Object {
 private:
@@ -16,7 +17,7 @@ private:
     const glm::vec2 right = glm::vec2(1, 0);
 
     SetSpeedEngine engine;
-    void move(const glm::vec2& rotation);
+
 
 public:
     void update_delta(int delta_time_in_miliseconds);
@@ -24,9 +25,11 @@ public:
     void move_down();
     void move_left();
     void move_right();
+    void move(const glm::vec2& rotation);
     Player(float speed, int id);
     ~Player();
     RenderSnapshot get_object_snapshot();
+    BoundingShape* get_object_bounding_shape();
 
     Player& operator=(const Player& other) {
         engine = other.engine;

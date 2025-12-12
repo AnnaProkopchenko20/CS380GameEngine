@@ -2,22 +2,30 @@
 
 #include <string>
 #include <unordered_map>
+#include <SFML/Window.hpp>
+#include "vec2.hpp"
+#include <map>
+#include "Command.h"
 
 namespace GameSettings
 {
 
-	const int screen_width_px = 1300;
-	const int screen_height_px = 1300;
+	const int screen_width_px = 1000;
+	const int screen_height_px = 1000;
 	const std::string window_name = "Basic game window";
 	const auto window_style = sf::Style::Close;
 	const int framerate_limit = 60;
 	const int top_limit_of_elapsed_time_in_miliseconds = 20;
 
-	const std::map<sf::Keyboard::Key, Command> sfml_keys_to_local_program_commands = {
+	inline const std::map<sf::Keyboard::Key, Command> sfml_keys_to_local_program_commands = {
 	{sf::Keyboard::Left, Command::LEFT},
 	{sf::Keyboard::Right, Command::RIGHT},
 	{sf::Keyboard::Up, Command::UP},
 	{sf::Keyboard::Down, Command::DOWN}
 	};
+
+	inline const float donut_radius = 40.0f;
+	inline const glm::vec2 unreachable_block_size(100, 100);
+	inline const glm::vec2 player_size(100, 86);
 };
 

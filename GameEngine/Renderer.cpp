@@ -29,12 +29,12 @@ void Renderer::draw_game(Context& context, sf::RenderWindow& window) {
 				window.draw(shape);
 			}
 			else if (obj._base_shape == "rectangle") {
-				float x = sprite.getLocalBounds().width / 2.f;
-				float y = sprite.getLocalBounds().height / 2.f;
+				float x = sprite.getLocalBounds().width;
+				float y = sprite.getLocalBounds().height;
 
 				sf::RectangleShape shape(sf::Vector2<float>(x, y));
 				shape.setFillColor(sf::Color::Blue);
-				shape.setPosition(obj._coord.x + x / 2, obj._coord.y + y / 2);
+				shape.setPosition(obj._coord.x, obj._coord.y);
 				window.draw(shape);
 			}
 		}

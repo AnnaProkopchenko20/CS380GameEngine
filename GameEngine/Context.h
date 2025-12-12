@@ -5,13 +5,7 @@
 #include <SFML/Window.hpp>
 #include <vec2.hpp> 
 #include "RenderSnapshot.h"
-
-enum class Command {
-	LEFT,
-	RIGHT,
-	UP,
-	DOWN
-};
+#include "Command.h"
 
 class Context{
 public:

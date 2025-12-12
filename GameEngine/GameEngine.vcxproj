@@ -147,6 +147,13 @@
     <ClCompile Include="SetSpeedEngine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AABBShape.h" />
+    <ClInclude Include="BoundingShape.h" />
+    <ClInclude Include="BoundingShapeType.h" />
+    <ClInclude Include="Circle.h" />
+    <ClInclude Include="CollisionAlgorithms.h" />
+    <ClInclude Include="CollisionTable.h" />
+    <ClInclude Include="Command.h" />
     <ClInclude Include="Context.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameLogic.h" />
@@ -157,6 +164,7 @@
     <ClInclude Include="Renderer.h" />
     <ClInclude Include="RendererSettings.h" />
     <ClInclude Include="SetSpeedEngine.h" />
+    <ClInclude Include="SpatialGrid.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
